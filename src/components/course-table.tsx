@@ -27,12 +27,16 @@ const CourseTable = () => {
   const TableRows = (rows: number) => {
     return (
       <Tr key={rows}>
-        <Td>
+        <Th>
           <Box>
-            <Text textAlign="center">{RowHeaderData[rows].name}</Text>
-            <Text textAlign="center">{RowHeaderData[rows].time}</Text>
+            <Text textAlign="center" fontSize="xs">
+              {RowHeaderData[rows].name}
+            </Text>
+            <Text textAlign="center" fontSize="xs">
+              {RowHeaderData[rows].time}
+            </Text>
           </Box>
-        </Td>
+        </Th>
         {courseTable[rows].map((unit, cols) => {
           if (unit.rowSpan === 0) {
             return <></>
