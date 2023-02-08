@@ -23,7 +23,7 @@ const CourseTable = () => {
       <Tr key={rows}>
         {courseTable[rows].map((unit, cols) => {
           return (
-            <Td key={rows * 7 + cols} px="1" fontSize="xs">
+            <Td key={rows * 7 + cols} px={1} py={1} fontSize="xs">
               <CourseCard unit={unit}></CourseCard>
             </Td>
           )

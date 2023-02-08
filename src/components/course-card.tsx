@@ -1,4 +1,14 @@
-import { Card, CardBody, CardHeader, CardFooter, Text } from '@chakra-ui/react'
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Text,
+  Box,
+  Divider,
+  Flex,
+  VStack,
+} from '@chakra-ui/react'
 import { CourseItem, CourseUnit } from '@/models/course-table'
 
 type Props = {
@@ -9,13 +19,22 @@ const CourseCard = (props: Props) => {
   const getCardBody = () => {
     if (props.unit.length === 0) return <></>
     return props.unit.map((item, index) => {
-      return <Text key={index}>{item.courseName}</Text>
+      return (
+        <VStack key={index} alignItems="center" spacing={0} textAlign="center">
+          <Box overflowWrap="break-word">{item.courseName}</Box>
+          <Box>
+            {item.teacherName} - {item.roomName}
+          </Box>
+        </VStack>
+      )
     })
   }
-
+  if (props.unit.length === 0) return <></>
   return (
-    <Card>
-      <CardBody py={2}>{getCardBody()}</CardBody>
+    <Card width={150} wordBreak="break-word" whiteSpace="break-spaces">
+      <CardBody py={2} px={1}>
+        {getCardBody()}
+      </CardBody>
     </Card>
   )
 }
