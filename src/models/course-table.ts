@@ -1,7 +1,7 @@
 /*
     CourseItem: item in a unit. 
 */
-export type CourseItem = {
+type CourseItem = {
   teacherName: string
   courseId: string
   courseName: string
@@ -10,18 +10,40 @@ export type CourseItem = {
   vaildWeeks: string
   taskId: string | null
 }
+
+type CourseList = CourseItem[][]
+
 /*
     CourseUnit: a unit in a course table. A unit is a specific period in a week.
     There are 13 * 7 units in a course table.
+    rowSpan: the number of units that this unit should span, default is 1. 
 */
-export type CourseUnit = CourseItem[]
-
-export type CourseList = CourseUnit[]
+export type CourseUnit = {
+  items: CourseItem[]
+  rowSpan: number
+  str: string
+}
 
 /*
     CourseTable: a table-like data that is processed in the shape of (13, 7)
 */
 export type CourseTable = CourseUnit[][]
+
+const CourseItemToString = (item: CourseItem): string => {
+  return (
+    item.courseName +
+    item.teacherName +
+    item.roomName +
+    item.vaildWeeks +
+    item.taskId
+  )
+}
+
+const CourseItemsToString = (items: CourseItem[]): string => {
+  let stringItems = items.map((item) => CourseItemToString(item))
+  stringItems.sort()
+  return stringItems.join('')
+}
 
 export const useCourseTable = (course_info: CourseList): CourseTable => {
   let courseTable: CourseTable = Array(13)
@@ -29,7 +51,22 @@ export const useCourseTable = (course_info: CourseList): CourseTable => {
     .map(() => Array(7).fill(null))
   for (let i = 0; i < 13; i++) {
     for (let j = 0; j < 7; j++) {
-      courseTable[i][j] = course_info[j * 13 + i]
+      let target = course_info[j * 13 + i]
+      courseTable[i][j] = {
+        items: target,
+        rowSpan: 1,
+        str: CourseItemsToString(target),
+      }
+    }
+  }
+  // Mark the rowSpan of the duplicate items
+  for (let j = 0; j < 7; j++) {
+    for (let i = 12; i > 0; i--) {
+      if (courseTable[i][j].str === '') continue
+      if (courseTable[i][j].str === courseTable[i - 1][j].str) {
+        courseTable[i - 1][j].rowSpan += courseTable[i][j].rowSpan
+        courseTable[i][j].rowSpan = 0
+      }
     }
   }
   return courseTable

@@ -34,8 +34,11 @@ const CourseTable = () => {
           </Box>
         </Td>
         {courseTable[rows].map((unit, cols) => {
+          if (unit.rowSpan === 0) {
+            return <></>
+          }
           return (
-            <Td key={rows * 7 + cols} px={1} py={1}>
+            <Td key={rows * 7 + cols} px={1} py={1} rowSpan={unit.rowSpan}>
               <Flex justify="center">
                 <CourseCard unit={unit}></CourseCard>
               </Flex>

@@ -1,1 +1,1 @@
-import { CourseItem, CourseUnit } from './course-table'
+import { CourseUnit } from './course-table'

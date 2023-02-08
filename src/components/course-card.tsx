@@ -9,7 +9,7 @@ import {
   Flex,
   VStack,
 } from '@chakra-ui/react'
-import { CourseItem, CourseUnit } from '@/models/course-table'
+import { CourseUnit } from '@/models/course-table'
 
 type Props = {
   unit: CourseUnit
@@ -17,8 +17,8 @@ type Props = {
 
 const CourseCard = (props: Props) => {
   const CourseCardBody = () => {
-    if (props.unit.length === 0) return <></>
-    return props.unit.map((item, index) => {
+    if (props.unit.items.length === 0) return <></>
+    return props.unit.items.map((item, index) => {
       return (
         <VStack key={index} alignItems="center" spacing={0} textAlign="center">
           <Box overflowWrap="break-word">{item.courseName}</Box>
@@ -29,7 +29,7 @@ const CourseCard = (props: Props) => {
       )
     })
   }
-  if (props.unit.length === 0) return <></>
+  if (props.unit.items.length === 0 || props.unit.rowSpan === 0) return <></>
   return (
     <Card width={150} wordBreak="break-word" whiteSpace="break-spaces">
       <CardBody py={1} px={1} fontSize="xx-small">
