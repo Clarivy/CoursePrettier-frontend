@@ -45,6 +45,28 @@ const CourseItemsToString = (items: CourseItem[]): string => {
   return stringItems.join('')
 }
 
+// Merge two CourseItems, used for de-duplicate items in a unit
+const MergeCourseItem = (
+  item_1: CourseItem,
+  item_2: CourseItem,
+  seperator: string = ','
+): CourseItem => {
+  let result_item: CourseItem = { ...item_1 }
+  if (item_1.courseId !== item_2.courseId)
+    result_item.courseId += seperator + item_2.courseId
+  if (item_1.courseName !== item_2.courseName)
+    result_item.courseName += seperator + item_2.courseName
+  if (item_1.roomId !== item_2.roomId)
+    result_item.roomId += seperator + item_2.roomId
+  if (item_1.roomName !== item_2.roomName)
+    result_item.roomName += seperator + item_2.roomName
+  if (item_1.taskId !== item_2.taskId)
+    result_item.taskId += seperator + item_2.taskId
+  if (item_1.teacherName !== item_2.teacherName)
+    result_item.teacherName += seperator + item_2.teacherName
+  return result_item
+}
+
 export const useCourseTable = (course_info: CourseList): CourseTable => {
   let courseTable: CourseTable = Array(13)
     .fill(null)
@@ -67,6 +89,26 @@ export const useCourseTable = (course_info: CourseList): CourseTable => {
         courseTable[i - 1][j].rowSpan += courseTable[i][j].rowSpan
         courseTable[i][j].rowSpan = 0
       }
+    }
+  }
+  // Remove duplicate Items in the same unit
+  for (let j = 0; j < 7; j++) {
+    for (let i = 0; i < 13; i++) {
+      if (courseTable[i][j].items.length < 2) continue
+      if (courseTable[i][j].rowSpan === 0) continue
+      courseTable[i][j].items.sort((lsh, rhs) => {
+        if (lsh.courseName < rhs.courseName) return -1
+        if (lsh.courseName > rhs.courseName) return 1
+        return 1
+      })
+      let items = courseTable[i][j].items
+      for (let k = items.length - 2; k >= 0; k--) {
+        if (items[k].courseName === items[k + 1].courseName) {
+          items[k] = MergeCourseItem(items[k], items[k + 1])
+          items.splice(k + 1, 1)
+        }
+      }
+      courseTable[i][j].items = items
     }
   }
   return courseTable

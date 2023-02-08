@@ -32,7 +32,7 @@ const CourseCard = (props: Props) => {
   if (props.unit.items.length === 0 || props.unit.rowSpan === 0) return <></>
   return (
     <Card width={150} wordBreak="break-word" whiteSpace="break-spaces">
-      <CardBody py={1} px={1} fontSize="xx-small">
+      <CardBody py={1} px={2} fontSize="xx-small">
         {CourseCardBody()}
       </CardBody>
     </Card>
