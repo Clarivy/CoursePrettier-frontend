@@ -29,7 +29,7 @@ export const useCourseTable = (course_info: CourseList): CourseTable => {
     .map(() => Array(7).fill(null))
   for (let i = 0; i < 13; i++) {
     for (let j = 0; j < 7; j++) {
-      courseTable[i][j] = course_info[i * 7 + j]
+      courseTable[i][j] = course_info[j * 13 + i]
     }
   }
   return courseTable
@@ -457,4 +457,36 @@ export const ExampleCourseData: CourseList = [
   [],
   [],
   [],
+]
+
+export type RowHeader = {
+  name: string
+  time: string
+}
+
+export const RowHeaderData: RowHeader[] = [
+  { name: '第1节', time: '8:15 - 9:00' },
+  { name: '第2节', time: '9:10 - 9:55' },
+  { name: '第3节', time: '10:15 - 11:00' },
+  { name: '第4节', time: '11:10 - 11:55' },
+  { name: '第5节', time: '13:00 - 13:45' },
+  { name: '第6节', time: '13:55 - 14:40' },
+  { name: '第7节', time: '15:00 - 15:45' },
+  { name: '第8节', time: '15:55 - 16:40' },
+  { name: '第9节', time: '16:50 - 17:35' },
+  { name: '第10节', time: '18:00 - 18:45' },
+  { name: '第11节', time: '18:55 - 19:40' },
+  { name: '第12节', time: '19:50 - 20:35' },
+  { name: '第13节', time: '20:45 - 21:30' },
+]
+
+export const ColumnHeaderData = [
+  '节次/周次',
+  '星期一',
+  '星期二',
+  '星期三',
+  '星期四',
+  '星期五',
+  '星期六',
+  '星期日',
 ]

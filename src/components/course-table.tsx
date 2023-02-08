@@ -10,21 +10,35 @@ import {
   TableCaption,
   Text,
   Box,
+  Flex,
 } from '@chakra-ui/react'
 
-import { ExampleCourseData, useCourseTable } from '@/models/course-table'
+import {
+  ExampleCourseData,
+  useCourseTable,
+  RowHeaderData,
+  ColumnHeaderData,
+} from '@/models/course-table'
 import CourseCard from './course-card'
 
 const CourseTable = () => {
   const courseTable = useCourseTable(ExampleCourseData)
 
-  const getTableRows = (rows: number) => {
+  const TableRows = (rows: number) => {
     return (
       <Tr key={rows}>
+        <Td>
+          <Box>
+            <Text textAlign="center">{RowHeaderData[rows].name}</Text>
+            <Text textAlign="center">{RowHeaderData[rows].time}</Text>
+          </Box>
+        </Td>
         {courseTable[rows].map((unit, cols) => {
           return (
-            <Td key={rows * 7 + cols} px={1} py={1} fontSize="xs">
-              <CourseCard unit={unit}></CourseCard>
+            <Td key={rows * 7 + cols} px={1} py={1}>
+              <Flex justify="center">
+                <CourseCard unit={unit}></CourseCard>
+              </Flex>
             </Td>
           )
         })}
@@ -35,9 +49,20 @@ const CourseTable = () => {
   return (
     <TableContainer width={1200}>
       <Table variant="simple" size="sm">
+        <Thead>
+          <Tr>
+            {ColumnHeaderData.map((item, index) => {
+              return (
+                <Th key={index} textAlign="center">
+                  {item}
+                </Th>
+              )
+            })}
+          </Tr>
+        </Thead>
         <Tbody>
           {courseTable.map((item, index) => {
-            return getTableRows(index)
+            return TableRows(index)
           })}
         </Tbody>
       </Table>

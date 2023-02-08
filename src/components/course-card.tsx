@@ -16,7 +16,7 @@ type Props = {
 }
 
 const CourseCard = (props: Props) => {
-  const getCardBody = () => {
+  const CourseCardBody = () => {
     if (props.unit.length === 0) return <></>
     return props.unit.map((item, index) => {
       return (
@@ -32,8 +32,8 @@ const CourseCard = (props: Props) => {
   if (props.unit.length === 0) return <></>
   return (
     <Card width={150} wordBreak="break-word" whiteSpace="break-spaces">
-      <CardBody py={2} px={1}>
-        {getCardBody()}
+      <CardBody py={1} px={1} fontSize="xx-small">
+        {CourseCardBody()}
       </CardBody>
     </Card>
   )
