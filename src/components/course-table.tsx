@@ -18,7 +18,9 @@ import {
   useCourseTable,
   RowHeaderData,
   ColumnHeaderData,
+  useCardColor,
 } from '@/models/course-table'
+
 import CourseCard from './course-card'
 
 const CourseTable = () => {
@@ -44,7 +46,10 @@ const CourseTable = () => {
           return (
             <Td key={rows * 7 + cols} px={1} py={1} rowSpan={unit.rowSpan}>
               <Flex justify="center">
-                <CourseCard unit={unit}></CourseCard>
+                <CourseCard
+                  unit={unit}
+                  useCardColor={useCardColor}
+                ></CourseCard>
               </Flex>
             </Td>
           )

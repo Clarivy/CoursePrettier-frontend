@@ -1,3 +1,4 @@
+import { ColorMode } from '@chakra-ui/react'
 /*
     CourseItem: item in a unit. 
 */
@@ -112,6 +113,35 @@ export const useCourseTable = (course_info: CourseList): CourseTable => {
     }
   }
   return courseTable
+}
+
+const colorList = {
+  light: ['blue.100', 'yellow.100', 'green.100', 'pink.100'],
+  dark: ['blue.600', 'yellow.600', 'green.600', 'pink.600'],
+}
+
+var colorMap: { [key: string]: { [key: string]: string } } = {
+  dark: {},
+  light: {},
+}
+var colorIndex = {
+  dark: 0,
+  light: 0,
+}
+
+export const useCardColor = (
+  colorMode: ColorMode,
+  courseUnit: CourseUnit
+): string => {
+  if (courseUnit.str === '') return ''
+  if (courseUnit.str in colorMap[colorMode])
+    return colorMap[colorMode][courseUnit.str]
+  if (colorIndex[colorMode] >= colorList[colorMode].length)
+    colorIndex[colorMode] = 0
+  colorMap[colorMode][courseUnit.str] =
+    colorList[colorMode][colorIndex[colorMode]]
+  colorIndex[colorMode]++
+  return colorMap[colorMode][courseUnit.str]
 }
 
 export const ExampleCourseData: CourseList = [
