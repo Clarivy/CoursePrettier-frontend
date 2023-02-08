@@ -21,10 +21,10 @@ const CourseTable = () => {
   const getTableRows = (rows: number) => {
     return (
       <Tr key={rows}>
-        {courseTable[rows].map((item, cols) => {
+        {courseTable[rows].map((unit, cols) => {
           return (
             <Td key={rows * 7 + cols} px="1" fontSize="xs">
-              <CourseCard item={item}></CourseCard>
+              <CourseCard unit={unit}></CourseCard>
             </Td>
           )
         })}

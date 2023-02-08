@@ -1,22 +1,21 @@
 import { Card, CardBody, CardHeader, CardFooter, Text } from '@chakra-ui/react'
-import { useCourseCard } from '@/models/course-card'
+import { CourseItem, CourseUnit } from '@/models/course-table'
 
 type Props = {
-  item: string | null
+  unit: CourseUnit
 }
 
 const CourseCard = (props: Props) => {
-  const items = useCourseCard(props.item)
   const getCardBody = () => {
-    if (items.length === 0) return <></>
-    return items.map((item, index) => {
-      return <Text key={index}>{item}</Text>
+    if (props.unit.length === 0) return <></>
+    return props.unit.map((item, index) => {
+      return <Text key={index}>{item.courseName}</Text>
     })
   }
 
   return (
     <Card>
-      <CardBody>{getCardBody()}</CardBody>
+      <CardBody py={2}>{getCardBody()}</CardBody>
     </Card>
   )
 }
