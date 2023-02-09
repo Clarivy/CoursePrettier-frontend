@@ -22,9 +22,11 @@ import {
 } from '@/models/course-table'
 
 import CourseCard from './course-card'
+import { courseList, uuid } from '@/models/global'
+import { useRouter } from 'next/router'
 
 const CourseTable = () => {
-  const courseTable = useCourseTable(ExampleCourseData)
+  const courseTable = useCourseTable(courseList)
 
   const TableRows = (rows: number) => {
     return (

@@ -22,6 +22,10 @@ import {
 } from '@chakra-ui/react'
 import { IoMdMoon as MoonIcon, IoMdSunny as SunIcon } from 'react-icons/io'
 
+type Props = {
+  isLogin: boolean
+}
+
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
     px={2}
@@ -37,7 +41,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
   </Link>
 )
 
-export default function NavBar() {
+export default function NavBar(props: Props) {
   const { colorMode, toggleColorMode } = useColorMode()
 
   const getLogo = () => {
@@ -62,7 +66,7 @@ export default function NavBar() {
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <Button>导出日历文件</Button>
+            {props.isLogin ? <Button>导出日历文件</Button> : <></>}
           </HStack>
         </Flex>
       </Box>
