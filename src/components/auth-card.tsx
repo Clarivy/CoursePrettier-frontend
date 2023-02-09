@@ -67,7 +67,7 @@ const AuthCard = () => {
                 value={userID}
               />
             </FormControl>
-            <FormControl id="password">
+            <FormControl id="password" onSubmit={handleClick}>
               <FormLabel>Eams 密码</FormLabel>
               <Input
                 type="password"
@@ -75,6 +75,11 @@ const AuthCard = () => {
                   setPassword(e.target.value)
                 }}
                 value={password}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleClick()
+                  }
+                }}
               />
             </FormControl>
             <Stack spacing={10}>
