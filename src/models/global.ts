@@ -18,7 +18,7 @@ interface LoginResponse {
   table: CourseList
 }
 
-export const baseUrl = 'http://localhost:8000'
+export const baseUrl = 'https://courseprettier.geekpie.club'
 
 export let courseList: CourseList = [] as CourseList
 export let uuid: string = ''
