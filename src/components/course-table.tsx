@@ -49,8 +49,8 @@ const CourseTable = () => {
             return <React.Fragment key={rows * 7 + cols}></React.Fragment>
           }
           return (
-            <Td key={rows * 7 + cols} px={1} py={1} rowSpan={unit.rowSpan}>
-              <Flex justify="center">
+            <Td key={rows * 7 + cols} px={1} rowSpan={unit.rowSpan} width={130}>
+              <Flex justify="center" height="90%" margin={1}>
                 <CourseCard
                   unit={unit}
                   useCardColor={useCardColor}
@@ -64,8 +64,8 @@ const CourseTable = () => {
   }
 
   return (
-    <TableContainer width={1200}>
-      <Table variant="simple" size="sm">
+    <TableContainer maxWidth={1000}>
+      <Table variant="simple" size="sm" height="1px">
         <Thead>
           <Tr>
             {ColumnHeaderData.map((item, index) => {

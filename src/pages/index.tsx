@@ -16,7 +16,7 @@ export default function Home() {
       <Head>
         <title>CousePrettier</title>
         <meta name="description" content="CousePrettier" />
-        <meta name="viewport" content="width=1000" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar isLogin={false}></NavBar>
