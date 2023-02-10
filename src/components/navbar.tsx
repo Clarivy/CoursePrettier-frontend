@@ -51,7 +51,9 @@ export default function NavBar(props: Props) {
     if (!props.isLogin) return <></>
     return (
       <>
-        <Button onClick={handleDownloadClick}>导出日历文件</Button>
+        <Button onClick={handleDownloadClick} isLoading={loading}>
+          导出日历文件
+        </Button>
         <Tooltip label="登出">
           <IconButton
             onClick={handleLogout}

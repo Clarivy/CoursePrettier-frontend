@@ -21,7 +21,7 @@ import NavBar from './navbar'
 const AuthCard = () => {
   const [userID, setUserId] = useState('')
   const [password, setPassword] = useState('')
-  const { handleLogin } = useLogin()
+  const { handleLogin, loading } = useLogin()
   const toast = useToast()
   const handleClick = () => {
     if (userID === '' || password === '') {
@@ -90,6 +90,7 @@ const AuthCard = () => {
                   bg: 'blue.500',
                 }}
                 onClick={handleClick}
+                isLoading={loading}
               >
                 Sign in
               </Button>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { useToast } from '@chakra-ui/react'
 import { setICSData } from './download-ics'
+import { useState } from 'react'
 
 export type LoginParams = {
   userID: string
@@ -28,6 +29,7 @@ api: /api/login
 export const useLogin = () => {
   const router = useRouter()
   const toast = useToast()
+  const [loading, setLoading] = useState(false)
 
   const loginMutation = useMutation((data: LoginParams) => {
     return axios.post<LoginResponse>(baseUrl + '/api/login', {
@@ -37,6 +39,7 @@ export const useLogin = () => {
   })
 
   const handleLogin = (data: LoginParams) => {
+    setLoading(true)
     loginMutation.mutate(data, {
       onSuccess: (res: AxiosResponse<LoginResponse>) => {
         /* Parse res['table'] to CourseList */
@@ -71,11 +74,15 @@ export const useLogin = () => {
           isClosable: true,
         })
       },
+      onSettled: () => {
+        setLoading(false)
+      },
     })
   }
 
   return {
     handleLogin,
+    loading,
   }
 }
 
