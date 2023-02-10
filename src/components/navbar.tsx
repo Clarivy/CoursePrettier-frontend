@@ -2,15 +2,8 @@ import { ReactNode } from 'react'
 import {
   Box,
   Flex,
-  Avatar,
   Link,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
@@ -19,8 +12,15 @@ import {
   Heading,
   HStack,
   Text,
+  IconButton,
+  Tooltip,
 } from '@chakra-ui/react'
-import { IoMdMoon as MoonIcon, IoMdSunny as SunIcon } from 'react-icons/io'
+import {
+  IoMdMoon as MoonIcon,
+  IoMdSunny as SunIcon,
+  IoMdLogOut as LogOutIcon,
+} from 'react-icons/io'
+import { useDownloadICS, handleDownloadClick } from '@/models/download-ics'
 
 type Props = {
   isLogin: boolean
@@ -44,8 +44,18 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function NavBar(props: Props) {
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const getLogo = () => {
-    return colorMode === 'dark' ? '/deemos.png' : '/deemos-dark.png'
+  const { data, loading } = useDownloadICS()
+
+  const afterLogin = () => {
+    if (!props.isLogin) return <></>
+    return (
+      <>
+        <Button onClick={handleDownloadClick}>导出日历文件</Button>
+        <Tooltip label="登出">
+          <IconButton aria-label="logout" icon={<LogOutIcon />}></IconButton>
+        </Tooltip>
+      </>
+    )
   }
 
   return (
@@ -66,7 +76,7 @@ export default function NavBar(props: Props) {
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            {props.isLogin ? <Button>导出日历文件</Button> : <></>}
+            {afterLogin()}
           </HStack>
         </Flex>
       </Box>

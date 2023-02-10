@@ -69,6 +69,7 @@ const MergeCourseItem = (
 }
 
 export const useCourseTable = (course_info: CourseList): CourseTable => {
+  if (course_info.length !== 91) return []
   let courseTable: CourseTable = Array(13)
     .fill(null)
     .map(() => Array(7).fill(null))
