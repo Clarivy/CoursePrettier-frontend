@@ -14,7 +14,6 @@ import {
 } from '@chakra-ui/react'
 
 import {
-  ExampleCourseData,
   useCourseTable,
   RowHeaderData,
   ColumnHeaderData,
@@ -24,9 +23,13 @@ import {
 import CourseCard from './course-card'
 import { courseList, uuid } from '@/models/global'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 const CourseTable = () => {
   const courseTable = useCourseTable(courseList)
+  if (courseList.length === 0) {
+    return <></>
+  }
 
   const TableRows = (rows: number) => {
     return (
@@ -43,7 +46,7 @@ const CourseTable = () => {
         </Th>
         {courseTable[rows].map((unit, cols) => {
           if (unit.rowSpan === 0) {
-            return <></>
+            return <React.Fragment key={rows * 7 + cols}></React.Fragment>
           }
           return (
             <Td key={rows * 7 + cols} px={1} py={1} rowSpan={unit.rowSpan}>
