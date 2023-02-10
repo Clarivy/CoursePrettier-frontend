@@ -3,6 +3,7 @@ import { CourseList, CourseUnit, CourseItem } from '@/models/course-table'
 import { useRouter } from 'next/router'
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { useToast } from '@chakra-ui/react'
+import { setICSData } from './download-ics'
 
 export type LoginParams = {
   userID: string
@@ -75,5 +76,18 @@ export const useLogin = () => {
 
   return {
     handleLogin,
+  }
+}
+
+export const useLogout = () => {
+  const router = useRouter()
+  const handleLogout = () => {
+    courseList = [] as CourseList
+    uuid = ''
+    setICSData('')
+    router.push('/')
+  }
+  return {
+    handleLogout,
   }
 }

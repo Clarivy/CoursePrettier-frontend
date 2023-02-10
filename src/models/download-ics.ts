@@ -26,6 +26,12 @@ export const useDownloadICS = () => {
       data: ics_data,
     }
   }
+  if (uuid === '') {
+    return {
+      loading: false,
+      data: '',
+    }
+  }
   let loading = false
   if (status === 'loading') {
     loading = true
@@ -34,7 +40,7 @@ export const useDownloadICS = () => {
     loading = false
     toast({
       title: '错误',
-      description: '下载失败',
+      description: '课表文件失败',
       status: 'error',
       duration: 5000,
       isClosable: true,
@@ -42,13 +48,6 @@ export const useDownloadICS = () => {
   }
   if (status === 'success') {
     loading = false
-    toast({
-      title: '成功',
-      description: '下载成功',
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    })
     ics_data = data.data
   }
   return {
@@ -67,4 +66,8 @@ export const handleDownloadClick = () => {
   download_ref.setAttribute('href', url)
   download_ref.setAttribute('download', 'course.ics')
   download_ref.click()
+}
+
+export const setICSData = (data: string) => {
+  ics_data = data
 }

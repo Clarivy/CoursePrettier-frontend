@@ -21,6 +21,7 @@ import {
   IoMdLogOut as LogOutIcon,
 } from 'react-icons/io'
 import { useDownloadICS, handleDownloadClick } from '@/models/download-ics'
+import { useLogout } from '@/models/global'
 
 type Props = {
   isLogin: boolean
@@ -43,8 +44,8 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function NavBar(props: Props) {
   const { colorMode, toggleColorMode } = useColorMode()
-
   const { data, loading } = useDownloadICS()
+  const { handleLogout } = useLogout()
 
   const afterLogin = () => {
     if (!props.isLogin) return <></>
@@ -52,7 +53,11 @@ export default function NavBar(props: Props) {
       <>
         <Button onClick={handleDownloadClick}>导出日历文件</Button>
         <Tooltip label="登出">
-          <IconButton aria-label="logout" icon={<LogOutIcon />}></IconButton>
+          <IconButton
+            onClick={handleLogout}
+            aria-label="logout"
+            icon={<LogOutIcon />}
+          ></IconButton>
         </Tooltip>
       </>
     )
