@@ -1,3 +1,5 @@
+# CoursePrettier-frontend
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -36,3 +38,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Acknowledgements
+
+- [ShanghaiTech OneAPI](https://github.com/yanglinshu/openapi-ce) by [Yang Linshu](https://github.com/yanglinshu/) and [Leomund](https://gitlab.isp.moe/Leomund)
+
+- [Exam-Table-ICS-Formatter](https://github.com/wtlyu/Exam-Table-ICS-Formatter) and [Course-Table-ICS-Formatter](https://github.com/wtlyu/Course-Table-ICS-Formatter)
+
+- [Python 大学生课表 (.ics) 生成](https://github.com/junyilou/python-ical-timetable)
+
+- [Next.js](https://nextjs.org/)
+
+- [TypeScript](https://www.typescriptlang.org/)
+
+- [React](https://reactjs.org/)
+
+- [Chakra UI](https://chakra-ui.com/)
+
+- [React Query](https://react-query.tanstack.com/)
