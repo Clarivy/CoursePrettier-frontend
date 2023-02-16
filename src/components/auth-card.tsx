@@ -97,6 +97,17 @@ const AuthCard = () => {
             </Stack>
           </Stack>
         </Box>
+        <Stack align={'center'}>
+          <Text fontSize={'sm'} color={'gray.600'} textAlign="center">
+            你需要登录你的ids账户才能使用 CoursePrettier.{' '}
+            <Link
+              href="https://clarivy.github.io/posts/courseprettier/courseprettier/"
+              isExternal
+            >
+              需要帮助?
+            </Link>
+          </Text>
+        </Stack>
       </Stack>
     </Flex>
   )
